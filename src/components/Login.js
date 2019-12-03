@@ -10,11 +10,11 @@ class Login extends Component {
     password: ''
   }
 
-  // componentWillUnmount() {
-  //   const token = JSON.parse(localStorage.getItem('token'));
-  //   setAuth(token);
-  //   console.log('componentWillUnmount')
-  // }
+  componentWillUnmount() {
+    const token = JSON.parse(localStorage.getItem('token'));
+    setAuth(token);
+    console.log('componentWillUnmount')
+  }
 
   handleChange = (e) => {
     this.setState({
