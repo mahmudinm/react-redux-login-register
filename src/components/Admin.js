@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
+import {getProtected, logout} from '../api/auth';
 
 class Admin extends Component {
   
@@ -14,7 +15,18 @@ class Admin extends Component {
   	// 		'Authorization': `Bearer ${token}`
   	// 	}
   	// })
-  	axios.get('http://localhost:8000/api/protected')
+
+  	// axios.get('http://localhost:8000/api/protected')
+  	// 		console.log(res);
+  	// 		this.setState({
+  	// 			message: res.data.message
+  	// 		})
+  	// 	.then((res) => {
+  	// 	}, (err) => {
+  	// 		console.log(err.response);
+  	// 	})
+
+  	getProtected()
   		.then((res) => {
   			console.log(res);
   			this.setState({
@@ -23,22 +35,32 @@ class Admin extends Component {
   		}, (err) => {
   			console.log(err.response);
   		})
+
   }
 
   handleLogout = () => {
-  	const token = JSON.parse(localStorage.getItem('token'));
-  	axios.post('http://localhost:8000/api/auth/logout', null, {
-  		headers: {
-  			'Authorization': `Bearer ${token}`
-  		}
-  	})
+  	logout()
   		.then((res) => {
   			console.log(res);
   			this.props.history.push('/login');
-  			localStorage.removeItem('token');
-  		},(err) => {
+  			localStorage.removeItem('token');  			
+  		}, (err) => {
   			console.log(err.response);
-  		})
+  		}) 
+
+  	// const token = JSON.parse(localStorage.getItem('token'));
+  	// axios.post('http://localhost:8000/api/auth/logout', null, {
+  	// 	headers: {
+  	// 		'Authorization': `Bearer ${token}`
+  	// 	}
+  	// })
+  	// 	.then((res) => {
+  	// 		console.log(res);
+  	// 		this.props.history.push('/login');
+  	// 		localStorage.removeItem('token');
+  	// 	},(err) => {
+  	// 		console.log(err.response);
+  	// 	})
   }
 
   render() {
