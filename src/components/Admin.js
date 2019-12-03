@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import {getProtected, logout} from '../api/auth';
 
-class Home extends Component {
+class Admin extends Component {
   
   state = {
   	message: ''
@@ -78,4 +78,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default Admin;
