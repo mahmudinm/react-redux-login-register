@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import setAuth from '../utils/setAuth';
+import { login } from '../api/auth'
 
 class Login extends Component {
 
@@ -8,6 +9,12 @@ class Login extends Component {
     email: '',
     password: ''
   }
+
+  // componentWillUnmount() {
+  //   const token = JSON.parse(localStorage.getItem('token'));
+  //   setAuth(token);
+  //   console.log('componentWillUnmount')
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -17,8 +24,9 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    axios.post('http://localhost:8000/api/auth/login', this.state)
+    console.log(this.state);  
+
+    login(this.state)
       .then((res) => {
         console.log(res);
         setAuth(res.data.token);
@@ -27,6 +35,16 @@ class Login extends Component {
       }, (err) => {
         console.log(err.response);
       })
+
+    // axios.post('http://localhost:8000/api/auth/login', this.state)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setAuth(res.data.token);
+    //     localStorage.setItem('token', JSON.stringify(res.data.token));
+    //     this.props.history.push('/admin');        
+    //   }, (err) => {
+    //     console.log(err.response);
+    //   })
   }
 
   render() {
