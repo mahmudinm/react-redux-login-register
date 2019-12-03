@@ -9,6 +9,11 @@ class Login extends Component {
     password: ''
   }
 
+  componentWillUnmount() {
+    const token = JSON.parse(localStorage.getItem('token'));
+    setAuth(token);
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value

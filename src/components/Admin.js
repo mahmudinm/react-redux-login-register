@@ -1,19 +1,20 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 
-class Home extends Component {
+class Admin extends Component {
   
   state = {
   	message: ''
   }
 
   componentDidMount() {
-  	const token = JSON.parse(localStorage.getItem('token'));
-  	axios.get('http://localhost:8000/api/protected', {
-  		headers: {
-  			'Authorization': `Bearer ${token}`
-  		}
-  	})
+  	// const token = JSON.parse(localStorage.getItem('token'));
+  	// axios.get('http://localhost:8000/api/protected', {
+  	// 	headers: {
+  	// 		'Authorization': `Bearer ${token}`
+  	// 	}
+  	// })
+  	axios.get('http://localhost:8000/api/protected')
   		.then((res) => {
   			console.log(res);
   			this.setState({
@@ -55,4 +56,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default Admin;
