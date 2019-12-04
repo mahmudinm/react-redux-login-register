@@ -1,4 +1,7 @@
 import axios from 'axios';
+import React from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
+import {history} from '../index';
 
 const token = JSON.parse(localStorage.getItem('token'));
 
@@ -9,33 +12,31 @@ const instance = axios.create({
 	}
 });
 
-
 // Refresh token jika error 401 / tokennya expired & Logout jika token blacklist atau error 500
 instance.interceptors.response.use((response) => {
 	return response;
 }, (error) => {
 
-	if(error.response.status !== 401) {
+	// Jika response 500 dan juga token tidak bisa di refresh lagi maka akan logout dan masuk ke halaman login
+	if(error.response.status === 500 && error.response.data.error.message === 'Token has expired and can no longer be refreshed') {
+		console.log('token di hapus dan logout kehalaman login');
+		console.log(error.response);
+		localStorage.removeItem('token');
+
 		return new Promise((resolve, reject) => {
-			console.log('from interceptors');
-			console.log(error.response);
-			reject(error);
+			// history nya belom bisa ngepush ke halaman cuma linknya doang terupdate
+			// history.push('/login');
+
+			console.log('redirect ke halaman login')
+			return window.location.href = '/login';
+			// reject(error);
 		})
 	}
 
-	// error.config.url === '/auth/refresh'
-	// if(error.response.error.statusCode === 500 || error.response.error.message === 'Token has expired and can no longer be refreshed') {
-	// 	localStorage.removeItem();
-	// 	console.log('ok error dari sini sampai');
-	// 	{/*<Redirect to="/login" />*/}
-	// 	return new Promise((resolve, reject) => {
-	// 		reject(error);
-	// 	})
-	// }
-
 	console.log(error.response);
 
-	if(error.response.status === 401 && error.response.data.error.message == 'Token has expired') {
+	// refresh token jika error 401 dan mesage token has expired
+	if(error.response.status === 401 && error.response.data.error.message === 'Token has expired') {
 		console.log('the token must be refreshed');
 		return instance.post('auth/refresh', null)
 			.then((res) => {
@@ -57,9 +58,7 @@ instance.interceptors.response.use((response) => {
 			})
 	}
 
-	// if(error.response.status === 401)
-
-
+	return Promise.reject(error);
 })
 
 export default instance;
