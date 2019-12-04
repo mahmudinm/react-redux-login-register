@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
-import setAuth from '../utils/setAuth';
 import { register } from '../api/auth'
 
 class Register extends Component {

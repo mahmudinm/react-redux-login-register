@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
-import setAuth from '../utils/setAuth';
 import { login } from '../api/auth'
 
 class Login extends Component {
@@ -8,12 +7,6 @@ class Login extends Component {
   state = {
     email: '',
     password: ''
-  }
-
-  componentWillUnmount() {
-    const token = JSON.parse(localStorage.getItem('token'));
-    setAuth(token);
-    console.log('componentWillUnmount')
   }
 
   handleChange = (e) => {
@@ -29,8 +22,6 @@ class Login extends Component {
     login(this.state)
       .then((res) => {
         console.log(res);
-        // setAuth(res.data.token);
-        // localStorage.setItem('token', JSON.stringify(res.data.token));
         this.props.history.push('/admin');        
       }, (err) => {
         console.log(err.response);
