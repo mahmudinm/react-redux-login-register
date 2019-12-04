@@ -9,23 +9,6 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-  	// const token = JSON.parse(localStorage.getItem('token'));
-  	// axios.get('http://localhost:8000/api/protected', {
-  	// 	headers: {
-  	// 		'Authorization': `Bearer ${token}`
-  	// 	}
-  	// })
-
-  	// axios.get('http://localhost:8000/api/protected')
-  	// 		console.log(res);
-  	// 		this.setState({
-  	// 			message: res.data.message
-  	// 		})
-  	// 	.then((res) => {
-  	// 	}, (err) => {
-  	// 		console.log(err.response);
-  	// 	})
-
   	getProtected()
   		.then((res) => {
   			console.log(res);
@@ -43,24 +26,10 @@ class Admin extends Component {
   		.then((res) => {
   			console.log(res);
   			this.props.history.push('/login');
-  			localStorage.removeItem('token');  			
+  			// localStorage.removeItem('token');  			
   		}, (err) => {
   			console.log(err.response);
   		}) 
-
-  	// const token = JSON.parse(localStorage.getItem('token'));
-  	// axios.post('http://localhost:8000/api/auth/logout', null, {
-  	// 	headers: {
-  	// 		'Authorization': `Bearer ${token}`
-  	// 	}
-  	// })
-  	// 	.then((res) => {
-  	// 		console.log(res);
-  	// 		this.props.history.push('/login');
-  	// 		localStorage.removeItem('token');
-  	// 	},(err) => {
-  	// 		console.log(err.response);
-  	// 	})
   }
 
   render() {

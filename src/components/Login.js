@@ -29,22 +29,12 @@ class Login extends Component {
     login(this.state)
       .then((res) => {
         console.log(res);
-        setAuth(res.data.token);
-        localStorage.setItem('token', JSON.stringify(res.data.token));
+        // setAuth(res.data.token);
+        // localStorage.setItem('token', JSON.stringify(res.data.token));
         this.props.history.push('/admin');        
       }, (err) => {
         console.log(err.response);
       })
-
-    // axios.post('http://localhost:8000/api/auth/login', this.state)
-    //   .then((res) => {
-    //     console.log(res);
-    //     setAuth(res.data.token);
-    //     localStorage.setItem('token', JSON.stringify(res.data.token));
-    //     this.props.history.push('/admin');        
-    //   }, (err) => {
-    //     console.log(err.response);
-    //   })
   }
 
   render() {
