@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import {getProtected, logout} from '../api/auth';
+import setAuth from '../utils/setAuth'
 
 class Admin extends Component {
   
@@ -8,20 +9,19 @@ class Admin extends Component {
   	message: ''
   }
 
-  componentDidMount() {
+  componentWillMount() {
   	// const token = JSON.parse(localStorage.getItem('token'));
   	// axios.get('http://localhost:8000/api/protected', {
   	// 	headers: {
   	// 		'Authorization': `Bearer ${token}`
   	// 	}
   	// })
-
   	// axios.get('http://localhost:8000/api/protected')
+  	// 	.then((res) => {
   	// 		console.log(res);
   	// 		this.setState({
   	// 			message: res.data.message
   	// 		})
-  	// 	.then((res) => {
   	// 	}, (err) => {
   	// 		console.log(err.response);
   	// 	})
@@ -42,8 +42,9 @@ class Admin extends Component {
   	logout()
   		.then((res) => {
   			console.log(res);
+        // setAuth(false); 			
   			this.props.history.push('/login');
-  			localStorage.removeItem('token');  			
+  			// localStorage.removeItem('token'); 
   		}, (err) => {
   			console.log(err.response);
   		}) 

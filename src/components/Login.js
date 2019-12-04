@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import axios from 'axios';
 import setAuth from '../utils/setAuth';
 import { login } from '../api/auth'
+// import instance from '../utils/api';
 
 class Login extends Component {
 
@@ -10,11 +11,11 @@ class Login extends Component {
     password: ''
   }
 
-  componentWillUnmount() {
-    const token = JSON.parse(localStorage.getItem('token'));
-    setAuth(token);
-    console.log('componentWillUnmount')
-  }
+  // componentWillUnmount() {
+  //   const token = JSON.parse(localStorage.getItem('token'));
+  //   setAuth(token);
+  //   console.log('componentWillUnmount')
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -29,8 +30,6 @@ class Login extends Component {
     login(this.state)
       .then((res) => {
         console.log(res);
-        setAuth(res.data.token);
-        localStorage.setItem('token', JSON.stringify(res.data.token));
         this.props.history.push('/admin');        
       }, (err) => {
         console.log(err.response);
@@ -45,6 +44,8 @@ class Login extends Component {
     //   }, (err) => {
     //     console.log(err.response);
     //   })
+
+
   }
 
   render() {
