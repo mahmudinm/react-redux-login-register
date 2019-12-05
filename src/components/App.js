@@ -7,19 +7,46 @@ import Login from './Login';
 import Register from './Register';
 import Admin from './Admin';
 import {createBrowserHistory} from 'history';
-
+import { Button, 
+         Navbar, 
+         Form,
+         Nav,
+         NavDropdown,
+         FormControl } from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 // const history = createBrowserHistory();
 
 class App extends Component {
 
   render() {
     return (
-      <Router >
-
-        <Link to="/">Home</Link>  &nbsp;
-        <Link to="/login">Login</Link> &nbsp;
-        <Link to="/register">Register</Link> &nbsp;
-        <Link to="/admin">Admin</Link> &nbsp;
+      <Router>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <LinkContainer to="/home">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/login">
+                <Nav.Link>Login</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <Nav.Link>Register</Nav.Link>
+              </LinkContainer>
+              <NavDropdown title="Admin" id="basic-nav-dropdown">
+                <LinkContainer to="/admin">
+                  <NavDropdown.Item>admin</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Divider />
+                <LinkContainer to="/admin">
+                  <NavDropdown.Item>Logout</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
 
         <Route exact path="/" component={Home} /> 
         <GuestRoute path="/login" component={Login} /> 
