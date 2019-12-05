@@ -1,7 +1,4 @@
 import axios from 'axios';
-import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
-import {history} from '../index';
 
 const token = JSON.parse(localStorage.getItem('token'));
 

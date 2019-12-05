@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import axios from 'axios';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { login } from '../api/auth'
 

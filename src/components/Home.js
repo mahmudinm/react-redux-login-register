@@ -7,7 +7,7 @@ class Home extends Component {
     return (
       <Fragment>
       	<Container className="mt-5">
-          <p>React Login menggunakan axios dan bootstrap</p>
+          <p>React Login menggunakan axios dan bootstrap dengan API Laravel & JWT Authetication</p>
 	        <hr/>
       	</Container>
       </Fragment>

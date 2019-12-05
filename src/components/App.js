@@ -1,19 +1,16 @@
-import React, {Component, Fragment} from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PrivateRoute } from '../utils/PrivateRoute';
 import { GuestRoute } from '../utils/GuestRoute';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Admin from './Admin';
-import {createBrowserHistory} from 'history';
 import { Button, 
          Navbar,
-         Container, 
-         Form,
+         Container,
          Nav,
-         NavDropdown,
-         FormControl } from 'react-bootstrap';
+         NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 // const history = createBrowserHistory();
 
