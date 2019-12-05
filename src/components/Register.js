@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
+import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { register } from '../api/auth'
+
 
 class Register extends Component {
 
@@ -42,18 +44,56 @@ class Register extends Component {
 
     return (
       <Fragment>
-        <p>Register <b>{message}</b></p>
-        <hr/>
-        <form onSubmit={handleSubmit} >
-          <label>Name :</label>
-          <input type="text" name="name" onChange={handleChange} value={name} /> <br/>
-          <label>Email :</label>
-          <input type="text" name="email" onChange={handleChange} value={email} /> <br/>
-          <label>Passwword :</label>
-          <input type="password" name="password" onChange={handleChange} value={password} /> <br/>
-          <input type="submit" value="Register"/> 
-        </form>
-      </Fragment>
+        <Container className="mt-5">
+          
+          <Row>
+            <Col md={6} className="mx-auto">
+              
+              <h2>Register <b>{message}</b></h2>
+              <hr/>
+
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control 
+                          type="text" 
+                          placeholder="Enter Name" 
+                          name="name" 
+                          onChange={handleChange} 
+                          value={name} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control 
+                          type="email" 
+                          placeholder="Enter email" 
+                          name="email" 
+                          onChange={handleChange} 
+                          value={email} />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control 
+                          type="password" 
+                          placeholder="Password"
+                          name="password" 
+                          onChange={handleChange}
+                          value={password} />
+                </Form.Group>
+                <Button variant="primary" type="submit" block>
+                  REGISTER
+                </Button>
+              </Form>
+
+            </Col>
+          </Row>
+          
+          {/*End Of Row*/}
+
+        </Container>
+      </Fragment>      
     );
   }
 

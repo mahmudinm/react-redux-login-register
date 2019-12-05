@@ -8,7 +8,8 @@ import Register from './Register';
 import Admin from './Admin';
 import {createBrowserHistory} from 'history';
 import { Button, 
-         Navbar, 
+         Navbar,
+         Container, 
          Form,
          Nav,
          NavDropdown,
@@ -22,30 +23,34 @@ class App extends Component {
     return (
       <Router>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <LinkContainer to="/home">
-                <Nav.Link>Home</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <Nav.Link>Login</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/register">
-                <Nav.Link>Register</Nav.Link>
-              </LinkContainer>
-              <NavDropdown title="Admin" id="basic-nav-dropdown">
-                <LinkContainer to="/admin">
-                  <NavDropdown.Item>admin</NavDropdown.Item>
+          <Container>
+            <Navbar.Brand>React Authentication</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <LinkContainer to="/">
+                  <Nav.Link>Home</Nav.Link>
                 </LinkContainer>
-                <NavDropdown.Divider />
-                <LinkContainer to="/admin">
-                  <NavDropdown.Item>Logout</NavDropdown.Item>
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
+                <LinkContainer to="/register">
+                  <Nav.Link>Register</Nav.Link>
+                </LinkContainer>
+              </Nav>
+              <Nav>
+                <NavDropdown title="Admin" id="basic-nav-dropdown">
+                  <LinkContainer to="/admin">
+                    <NavDropdown.Item>admin</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <LinkContainer to="/admin">
+                    <NavDropdown.Item>Logout</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
         </Navbar>
 
         <Route exact path="/" component={Home} /> 

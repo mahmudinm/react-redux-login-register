@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import axios from 'axios';
+import { Container, Button, Col, Row } from 'react-bootstrap';
 import {getProtected, logout} from '../api/auth';
+
 
 class Admin extends Component {
   
@@ -37,10 +39,16 @@ class Admin extends Component {
 
     return (
       <Fragment>
-        <p>Admin Dashboard</p>
-        <hr/>
-        <p>{this.state.message}</p>
-        <button onClick={handleLogout} >Logout</button>
+        <Container className="mt-5">
+          <Row>
+            <Col>
+              <p>Admin Dashboard</p>
+              <hr/>
+              <p>{this.state.message}</p>
+              <Button onClick={handleLogout}>Logout</Button>
+            </Col>
+          </Row>
+        </Container>
       </Fragment>
     );
   }
