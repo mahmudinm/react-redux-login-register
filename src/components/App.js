@@ -9,7 +9,6 @@ import Register from './Register';
 import Admin from './Admin';
 import NavigationBar from './NavigationBar';
 
-
 const history = createBrowserHistory();
 
 class App extends Component {
