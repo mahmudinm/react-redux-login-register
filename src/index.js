@@ -13,6 +13,12 @@ const store = createStore(
 	applyMiddleware(thunk)
 )
 
+if(localStorage.token) {
+	console.log('localStorage ada')
+	const token = JSON.parse(localStorage.token);
+	store.dispatch({type: 'SET_LOGIN', value: token});
+}
+
 ReactDOM.render(
 	<Provider store={store}>
 		<App />

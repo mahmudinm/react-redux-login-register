@@ -9,7 +9,7 @@ export const loginAPI = (data) => (dispatch) => {
 	const promise = new Promise((resolve, reject) => {
 		instance.post('auth/login', data)
 			.then((res) => {
-				dispatch({type: 'SET_LOGIN', value: res.data});
+				dispatch({type: 'SET_LOGIN', value: res.data.token});
 				storeToken(res.data.token);
 				resolve(res);
 			}, (err) => {

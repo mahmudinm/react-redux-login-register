@@ -24,7 +24,6 @@ class Admin extends Component {
   }
 
   handleLogout = () => {
-    // const { logout } = this.props
 
   	this.props.logout()
   		.then((res) => {
