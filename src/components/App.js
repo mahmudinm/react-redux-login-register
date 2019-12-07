@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PrivateRoute } from '../utils/PrivateRoute';
 import { GuestRoute } from '../utils/GuestRoute';
@@ -6,17 +6,42 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Admin from './Admin';
-import { Button, 
-         Navbar,
+import { Navbar,
          Container,
          Nav,
          NavDropdown} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
-// const history = createBrowserHistory();
+import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
 
 class App extends Component {
 
   render() {
+
+    const {isAuthenticated} = this.props.auth;
+
+    const GuestNav = (
+      <Fragment>
+        <LinkContainer to="/login">
+          <Nav.Link>Login</Nav.Link>
+        </LinkContainer>
+        <LinkContainer to="/register">
+          <Nav.Link>Register</Nav.Link>
+        </LinkContainer>              
+      </Fragment>
+    )
+
+    const UserNav = (
+      <NavDropdown title="Admin" id="basic-nav-dropdown">
+        <LinkContainer to="/admin">
+          <NavDropdown.Item>admin</NavDropdown.Item>
+        </LinkContainer>
+        <NavDropdown.Divider />
+        <LinkContainer to="/admin">
+          <NavDropdown.Item>Logout</NavDropdown.Item>
+        </LinkContainer>
+      </NavDropdown>
+    )
+
     return (
       <Router>
         <Navbar bg="light" expand="lg">
@@ -28,23 +53,9 @@ class App extends Component {
                 <LinkContainer to="/">
                   <Nav.Link>Home</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/login">
-                  <Nav.Link>Login</Nav.Link>
-                </LinkContainer>
-                <LinkContainer to="/register">
-                  <Nav.Link>Register</Nav.Link>
-                </LinkContainer>
               </Nav>
               <Nav>
-                <NavDropdown title="Admin" id="basic-nav-dropdown">
-                  <LinkContainer to="/admin">
-                    <NavDropdown.Item>admin</NavDropdown.Item>
-                  </LinkContainer>
-                  <NavDropdown.Divider />
-                  <LinkContainer to="/admin">
-                    <NavDropdown.Item>Logout</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
+                {isAuthenticated ? UserNav : GuestNav }
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -61,4 +72,8 @@ class App extends Component {
 
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, null)(App);

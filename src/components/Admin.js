@@ -1,7 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import { Container, Button, Col, Row } from 'react-bootstrap';
-import {getProtected, logout} from '../api/auth';
-
+import {getProtected} from '../api/auth';
+import {logoutAPI} from '../actions/auth';
+import {connect} from 'react-redux';
 
 class Admin extends Component {
   
@@ -23,7 +24,9 @@ class Admin extends Component {
   }
 
   handleLogout = () => {
-  	logout()
+    // const { logout } = this.props
+
+  	this.props.logout()
   		.then((res) => {
   			console.log(res);
   			this.props.history.push('/login');
@@ -54,4 +57,8 @@ class Admin extends Component {
 
 }
 
-export default Admin;
+const reduxDispatch = (dispatch) => ({
+  logout: () => dispatch(logoutAPI())
+})
+
+export default connect(null, reduxDispatch)(Admin);

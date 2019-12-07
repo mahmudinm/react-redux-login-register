@@ -1,6 +1,8 @@
 import React, {Component, Fragment} from 'react';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
-import { login } from '../api/auth'
+import { connect } from 'react-redux'
+import { loginAPI } from '../actions/auth'
+// import { login } from '../api/auth'
 
 class Login extends Component {
 
@@ -19,7 +21,7 @@ class Login extends Component {
     e.preventDefault();
     console.log(this.state);  
 
-    login(this.state)
+    this.props.login(this.state)
       .then((res) => {
         console.log(res);
         this.props.history.push('/admin');        
@@ -80,4 +82,8 @@ class Login extends Component {
 
 }
 
-export default Login;
+const reduxDispatch = (dispatch) => ({
+  login: (data) => dispatch(loginAPI(data))
+});
+
+export default connect(null, reduxDispatch)(Login);
