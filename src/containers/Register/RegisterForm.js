@@ -17,7 +17,7 @@ const validate = (values) => {
   return errors
 }  
 
-
+// ketika telah berhasil di submit maka form akan di kosongkan
 const afterSubmit = (result, dispatch) => {
   dispatch(reset('register'));
 }
