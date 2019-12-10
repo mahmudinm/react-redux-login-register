@@ -2,26 +2,15 @@ import React, {Component, Fragment} from 'react';
 import { Container, Form, Button, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { loginAPI } from '../actions/auth'
-// import { login } from '../api/auth'
+import LoginForm from './LoginForm';
 
 class Login extends Component {
 
-  state = {
-    email: '',
-    password: ''
-  }
+  handleSubmit = (data) => {
+    // e.preventDefault();
+    console.log(data);  
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);  
-
-    this.props.login(this.state)
+    this.props.login(data)
       .then((res) => {
         console.log(res);
         this.props.history.push('/admin');        
@@ -31,7 +20,7 @@ class Login extends Component {
   }
 
   render() {
-    const {handleChange, handleSubmit} = this;
+    const {handleSubmit} = this;
 
     return (
       <Fragment>
@@ -44,37 +33,11 @@ class Login extends Component {
 
               <hr/>
 
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control 
-                          type="email" 
-                          placeholder="Enter email" 
-                          name="email" 
-                          onChange={handleChange} />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control 
-                          type="password" 
-                          placeholder="Password"
-                          name="password" 
-                          onChange={handleChange} />
-                </Form.Group>
-                <Button variant="primary" type="submit" block>
-                  LOGIN
-                </Button>
-              </Form>
+              <LoginForm onSubmit={handleSubmit} />
 
             </Col>
           </Row>
           
-          {/*End Of Row*/}
-
         </Container>
       </Fragment>
     );
