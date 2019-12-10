@@ -1,45 +1,36 @@
-import React, {Component, Fragment} from 'react';
-import { Container, Form, Button, Col, Row } from 'react-bootstrap';
+import React, {Component, Fragment} from 'react'
+import { Container, Form, Button, Col, Row } from 'react-bootstrap'
+import { SubmissionError } from 'redux-form';
+import RegisterForm from './RegisterForm'
 import { register } from '../api/auth'
-
 
 class Register extends Component {
 
   state = {
-    name: '',
-    email: '',
-    password: '',
-    message: '',
+    message: ''
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+  handleSubmit = (data) => {
+    console.log(data)
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);  
-
-    register(this.state)
+    return register(data)
       .then((res) => {
         console.log(res);     
         this.setState({
-          name: '',
-          email: '',
-          password: '',
-          message: 'thanks for registering'
+          message: 'Thanks For Registering'
         })
       }, (err) => {
         console.log(err.response);
+        throw new SubmissionError({
+          _error: 'Email has been used'
+        })
       })
 
   }
 
   render() {
-    const {handleChange, handleSubmit} = this;
-    const {name, email, password, message} = this.state;
+    const {handleSubmit} = this
+    const {message} = this.state
 
     return (
       <Fragment>
@@ -48,48 +39,15 @@ class Register extends Component {
           <Row>
             <Col md={6} className="mx-auto">
               
-              <h2>Register <b>{message}</b></h2>
+              <h2>Register</h2>
+              {message && <div className="alert alert-success">{message}</div>}
               <hr/>
 
-              <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Name</Form.Label>
-                  <Form.Control 
-                          type="text" 
-                          placeholder="Enter Name" 
-                          name="name" 
-                          onChange={handleChange} 
-                          value={name} />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control 
-                          type="email" 
-                          placeholder="Enter email" 
-                          name="email" 
-                          onChange={handleChange} 
-                          value={email} />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control 
-                          type="password" 
-                          placeholder="Password"
-                          name="password" 
-                          onChange={handleChange}
-                          value={password} />
-                </Form.Group>
-                <Button variant="primary" type="submit" block>
-                  REGISTER
-                </Button>
-              </Form>
+              <RegisterForm onSubmit={handleSubmit}/>  
 
             </Col>
           </Row>
           
-          {/*End Of Row*/}
 
         </Container>
       </Fragment>      
