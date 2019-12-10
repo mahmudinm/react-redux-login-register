@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form';
-import { loginAPI } from '../actions/auth'
+import { loginAPI } from '../../actions/auth'
 import LoginForm from './LoginForm';
 
 class Login extends Component {

@@ -1,13 +1,13 @@
 import React, {Component, Fragment} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from "history";
-import { PrivateRoute } from '../utils/PrivateRoute';
-import { GuestRoute } from '../utils/GuestRoute';
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
-import Admin from './Admin';
-import NavigationBar from './NavigationBar';
+import { PrivateRoute } from '../components/PrivateRoute';
+import { GuestRoute } from '../components/GuestRoute';
+import Home from './Home/Home';
+import Login from './Login/Login';
+import Register from './Register/Register';
+import Admin from './Admin/Admin';
+import NavigationBar from '../components/NavigationBar';
 
 const history = createBrowserHistory();
 

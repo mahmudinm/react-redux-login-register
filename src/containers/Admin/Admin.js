@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { Container, Button, Col, Row } from 'react-bootstrap';
-import {getProtected} from '../api/auth';
-import {logoutAPI} from '../actions/auth';
+import { getProtected } from '../../api/auth';
+import {logoutAPI} from '../../actions/auth';
 import {connect} from 'react-redux';
 
 class Admin extends Component {

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react'
 import { Container, Form, Button, Col, Row } from 'react-bootstrap'
 import { SubmissionError } from 'redux-form';
 import RegisterForm from './RegisterForm'
-import { register } from '../api/auth'
+import { register } from '../../api/auth'
 
 class Register extends Component {
 
