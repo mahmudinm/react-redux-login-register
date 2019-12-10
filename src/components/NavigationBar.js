@@ -30,7 +30,7 @@ class NavigationBar extends Component {
 	          <Nav.Link>Login</Nav.Link>
 	        </LinkContainer>
 	        <LinkContainer to="/register">
-	          <Nav.Link>Register diubah</Nav.Link>
+	          <Nav.Link>Register</Nav.Link>
 	        </LinkContainer>              
 	      </Fragment>
 	    )
