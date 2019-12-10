@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
-import { Container, Form, Button, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux'
+import { SubmissionError } from 'redux-form';
 import { loginAPI } from '../actions/auth'
 import LoginForm from './LoginForm';
 
@@ -10,12 +11,15 @@ class Login extends Component {
     // e.preventDefault();
     console.log(data);  
 
-    this.props.login(data)
+    return this.props.login(data)
       .then((res) => {
         console.log(res);
         this.props.history.push('/admin');        
       }, (err) => {
         console.log(err.response);
+        throw new SubmissionError({
+          _error: 'Login failed! Email Or Password not correct'
+        })
       })
   }
 
