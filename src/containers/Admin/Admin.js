@@ -1,35 +1,25 @@
 import React, {Component, Fragment} from 'react';
 import { Container, Button, Col, Row } from 'react-bootstrap';
-import { getProtected } from '../../api/auth';
-import {logoutAPI} from '../../actions/auth';
-import {connect} from 'react-redux';
+import { logoutAPI, getProtectedAPI } from '../../actions/auth';
+import { connect } from 'react-redux';
 
 class Admin extends Component {
   
-  state = {
-  	message: ''
-  }
 
   componentDidMount() {
-  	getProtected()
+  	this.props.getProtected()
   		.then((res) => {
-  			console.log(res);
-  			this.setState({
-  				message: res.data.message
-  			})
+  			// console.log(res);
   		}, (err) => {
   			console.log(err.response);
   		})
-
   }
 
   handleLogout = () => {
-
   	this.props.logout()
   		.then((res) => {
   			console.log(res);
   			this.props.history.push('/login');
-  			// localStorage.removeItem('token');  			
   		}, (err) => {
   			console.log(err.response);
   		}) 
@@ -37,6 +27,7 @@ class Admin extends Component {
 
   render() {
   	const {handleLogout} = this;
+    const {message} = this.props.message;
 
     return (
       <Fragment>
@@ -45,7 +36,7 @@ class Admin extends Component {
             <Col>
               <p>Admin Dashboard</p>
               <hr/>
-              <p>{this.state.message}</p>
+              <p>{message}</p>
               <Button onClick={handleLogout}>Logout</Button>
             </Col>
           </Row>
@@ -56,8 +47,13 @@ class Admin extends Component {
 
 }
 
-const reduxDispatch = (dispatch) => ({
-  logout: () => dispatch(logoutAPI())
+const reduxState = (state) => ({
+  message: state.auth
 })
 
-export default connect(null, reduxDispatch)(Admin);
+const reduxDispatch = (dispatch) => ({
+  logout: () => dispatch(logoutAPI()),
+  getProtected: () => dispatch(getProtectedAPI())
+})
+
+export default connect(reduxState, reduxDispatch)(Admin);

@@ -1,8 +1,9 @@
 import React, {Component, Fragment} from 'react'
 import { Container, Form, Button, Col, Row } from 'react-bootstrap'
 import { SubmissionError } from 'redux-form';
+import { connect } from 'react-redux';
 import RegisterForm from './RegisterForm'
-import { register } from '../../api/auth'
+import { registerAPI } from '../../actions/auth'
 
 class Register extends Component {
 
@@ -13,7 +14,7 @@ class Register extends Component {
   handleSubmit = (data) => {
     console.log(data)
 
-    return register(data)
+    return this.props.register(data)
       .then((res) => {
         console.log(res);     
         this.setState({
@@ -56,4 +57,8 @@ class Register extends Component {
 
 }
 
-export default Register;
+const reduxDispatch = (dispatch) => ({
+  register: (data) => dispatch(registerAPI(data))
+})
+
+export default connect(null, reduxDispatch)(Register);

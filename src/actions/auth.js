@@ -35,3 +35,30 @@ export const logoutAPI = () => (dispatch) => {
 	return promise
 }
 
+export const registerAPI = (data) => (dispatch) => {
+	const promise = new Promise((resolve, reject) => {
+		instance.post('auth/signup', data)
+			.then((res) => {
+				dispatch({type: 'SET_REGISTER'});
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			})
+	})
+
+	return promise
+}
+
+export const getProtectedAPI = () => (dispatch) => {
+	const promise = new Promise((resolve, reject) => {
+		instance.get('protected')
+			.then((res) => {
+				dispatch({type: 'SET_ADMIN', value: res.data.message})
+				resolve(res);
+			}, (err) => {
+				reject(err);
+			})
+	})
+
+	return promise
+}

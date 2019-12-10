@@ -1,7 +1,8 @@
 const initialState = {
 	isAuthenticated: false,
 	loading: false,
-	user: {}
+	user: {},
+	message: ''
 };
 
 const auth = (state = initialState, action = {}) => {
@@ -16,6 +17,15 @@ const auth = (state = initialState, action = {}) => {
 			return {
 				isAuthenticated: false,
 				user: null
+			}
+		case 'SET_REGISTER':
+			return {
+				...state
+			}
+		case 'SET_ADMIN':
+			return {
+				...state,
+				message: action.value
 			}
 		default: return state;
 	}

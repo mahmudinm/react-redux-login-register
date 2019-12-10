@@ -4,8 +4,8 @@ import { ReduxForm } from '../../components/ReduxForm';
 
 const validate = (values) => {
   const errors = {}
-  if (!values.username) {
-    errors.username = 'Username Required';
+  if (!values.name) {
+    errors.name = 'Name Required';
   }
   if (!values.email) {
     errors.email = 'Email Required';
