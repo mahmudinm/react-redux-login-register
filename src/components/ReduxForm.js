@@ -1,5 +1,6 @@
 import React from 'react';
 
+// ReduxForm custom field untuk sync validasi / validasi secara langsung
 export const ReduxForm = ({
   input,
   label,

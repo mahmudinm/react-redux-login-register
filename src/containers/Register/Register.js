@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react'
-import { Container, Form, Button, Col, Row } from 'react-bootstrap'
+import { Container, Col, Row } from 'react-bootstrap'
 import { SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 import RegisterForm from './RegisterForm'
@@ -7,21 +7,15 @@ import { registerAPI } from '../../actions/auth'
 
 class Register extends Component {
 
-  state = {
-    message: ''
-  }
-
   handleSubmit = (data) => {
     console.log(data)
 
     return this.props.register(data)
       .then((res) => {
         console.log(res);     
-        this.setState({
-          message: 'Thanks For Registering'
-        })
       }, (err) => {
         console.log(err.response);
+        // validasi async / validasi ke server ketika terjadi error pada server        
         throw new SubmissionError({
           _error: 'Email has been used'
         })
@@ -31,7 +25,7 @@ class Register extends Component {
 
   render() {
     const {handleSubmit} = this
-    const {message} = this.state
+    const {message} = this.props.message
 
     return (
       <Fragment>
@@ -57,8 +51,12 @@ class Register extends Component {
 
 }
 
+const reduxState = (state) => ({
+  message: state.auth
+})
+
 const reduxDispatch = (dispatch) => ({
   register: (data) => dispatch(registerAPI(data))
 })
 
-export default connect(null, reduxDispatch)(Register);
+export default connect(reduxState, reduxDispatch)(Register);

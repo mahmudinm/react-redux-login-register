@@ -2,6 +2,7 @@ import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 import { ReduxForm } from '../../components/ReduxForm';
 
+// validasi sync/langsung untuk form
 const validate = (values) => {
   const errors = {}
   if (!values.name) {
@@ -22,7 +23,7 @@ const afterSubmit = (result, dispatch) => {
 }
 
 const RegisterForm = (props) => {
-  const { error, handleSubmit, pristine, reset, submitting } = props
+  const { error, handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit}>

@@ -20,7 +20,8 @@ const auth = (state = initialState, action = {}) => {
 			}
 		case 'SET_REGISTER':
 			return {
-				...state
+				...state,
+				message: action.value
 			}
 		case 'SET_ADMIN':
 			return {

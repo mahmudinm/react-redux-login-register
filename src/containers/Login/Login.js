@@ -8,7 +8,6 @@ import LoginForm from './LoginForm';
 class Login extends Component {
 
   handleSubmit = (data) => {
-    // e.preventDefault();
     console.log(data);  
 
     return this.props.login(data)
@@ -17,6 +16,8 @@ class Login extends Component {
         this.props.history.push('/admin');        
       }, (err) => {
         console.log(err.response);
+
+        // validasi async / validasi ke server ketika terjadi error pada server
         throw new SubmissionError({
           _error: 'Login failed! Email Or Password not correct'
         })

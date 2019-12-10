@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 
 class Admin extends Component {
   
-
   componentDidMount() {
   	this.props.getProtected()
   		.then((res) => {
-  			// console.log(res);
+  			console.log(res);
   		}, (err) => {
   			console.log(err.response);
   		})

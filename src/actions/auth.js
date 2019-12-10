@@ -1,5 +1,6 @@
 import instance from '../utils/api';
 
+// Set token ketika telah login supaya bisa mendapatkan data dari server
 export const storeToken = (token) => {
   localStorage.setItem('token', JSON.stringify(token));
   instance.defaults.headers.common.authorization = `Bearer ${token}`;
@@ -39,7 +40,7 @@ export const registerAPI = (data) => (dispatch) => {
 	const promise = new Promise((resolve, reject) => {
 		instance.post('auth/signup', data)
 			.then((res) => {
-				dispatch({type: 'SET_REGISTER'});
+				dispatch({type: 'SET_REGISTER', value: 'Terima Kasih Telah Mendaftar'});
 				resolve(res);
 			}, (err) => {
 				reject(err);
